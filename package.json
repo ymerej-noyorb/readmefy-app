@@ -2,7 +2,7 @@
   "name": "readmefy-app",
   "version": "1.0.0",
   "description": "A high-performance and scalable React application powered by Vite for fast development and efficient builds.",
-  "main": "main.jsx",
+  "main": "index.jsx",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -23,8 +23,10 @@
   },
   "homepage": "https://github.com/ymerej-noyorb/readmefy-app#readme",
   "dependencies": {
+    "@tailwindcss/vite": "^4.0.6",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "tailwindcss": "^4.0.6"
   },
   "devDependencies": {
     "@types/react": "^19.0.8",
