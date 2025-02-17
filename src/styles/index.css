@@ -1,1 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 @import "tailwindcss";
+
+::selection {
+    background-color: var(--color-blue-800);
+}
+
+@theme {
+    --default-font-family: "Poppins", serif;
+    --font-serif: "Roboto", serif;
+
+    --color-dark-50: hsl(228, 18%, 89%);
+    --color-dark-100: hsl(228, 19%, 79%);
+    --color-dark-200: hsl(227, 19%, 69%);
+    --color-dark-300: hsl(227, 19%, 59%);
+    --color-dark-400: hsl(226, 19%, 50%);
+    --color-dark-500: hsl(226, 28%, 23%);
+    --color-dark-600: hsl(226, 30%, 19%);
+    --color-dark-700: hsl(226, 31%, 15%);
+    --color-dark-800: hsl(226, 32%, 11%);
+    --color-dark-900: hsl(225, 33%, 6%);
+  
+    --color-white-50: hsl(0, 0%, 100%);
+    --color-white-100: hsl(180, 33%, 99%);
+    --color-white-200: hsl(200, 50%, 98%);
+    --color-white-300: hsl(200, 60%, 97%);
+    --color-white-400: hsl(200, 67%, 96%);
+    --color-white-500: hsl(200, 70%, 95%);
+    --color-white-600: hsl(200, 17%, 86%);
+    --color-white-700: hsl(200, 11%, 78%);
+    --color-white-800: hsl(200, 9%, 69%);
+    --color-white-900: hsl(200, 6%, 58%);
+  
+    --color-blue-50: hsl(210, 76%, 97%);
+    --color-blue-100: hsl(210, 78%, 94%);
+    --color-blue-200: hsl(210, 76%, 86%);
+    --color-blue-300: hsl(210, 72%, 78%);
+    --color-blue-400: hsl(210, 67%, 70%);
+    --color-blue-500: hsl(210, 53%, 80%);
+    --color-blue-600: hsl(210, 46%, 63%);
+    --color-blue-700: hsl(210, 41%, 50%);
+    --color-blue-800: hsl(210, 45%, 38%);
+    --color-blue-900: hsl(210, 40%, 25%);
+  
+    --color-orange-50: hsl(15, 100%, 97%);
+    --color-orange-100: hsl(15, 100%, 94%);
+    --color-orange-200: hsl(15, 100%, 88%);
+    --color-orange-300: hsl(15, 100%, 81%);
+    --color-orange-400: hsl(15, 100%, 75%);
+    --color-orange-500: hsl(10, 85%, 84%);
+    --color-orange-600: hsl(10, 50%, 75%);
+    --color-orange-700: hsl(10, 41%, 66%);
+    --color-orange-800: hsl(10, 38%, 56%);
+    --color-orange-900: hsl(10, 31%, 45%);
+  
+    --color-red-50: hsl(0, 88%, 96%);
+    --color-red-100: hsl(0, 88%, 92%);
+    --color-red-200: hsl(0, 77%, 82%);
+    --color-red-300: hsl(0, 75%, 73%);
+    --color-red-400: hsl(0, 73%, 64%);
+    --color-red-500: hsl(0, 57%, 80%);
+    --color-red-600: hsl(0, 28%, 67%);
+    --color-red-700: hsl(0, 20%, 51%);
+    --color-red-800: hsl(0, 28%, 35%);
+    --color-red-900: hsl(0, 50%, 20%);
+  
+    --color-pink-50: hsl(300, 88%, 96%);
+    --color-pink-100: hsl(300, 88%, 92%);
+    --color-pink-200: hsl(300, 77%, 82%);
+    --color-pink-300: hsl(300, 75%, 73%);
+    --color-pink-400: hsl(300, 73%, 64%);
+    --color-pink-500: hsl(300, 57%, 80%);
+    --color-pink-600: hsl(300, 28%, 67%);
+    --color-pink-700: hsl(300, 20%, 51%);
+    --color-pink-800: hsl(300, 28%, 35%);
+    --color-pink-900: hsl(300, 50%, 20%);
+  
+    --color-green-50: hsl(120, 88%, 96%);
+    --color-green-100: hsl(120, 88%, 92%);
+    --color-green-200: hsl(120, 77%, 82%);
+    --color-green-300: hsl(120, 75%, 73%);
+    --color-green-400: hsl(120, 73%, 64%);
+    --color-green-500: hsl(120, 57%, 80%);
+    --color-green-600: hsl(120, 28%, 67%);
+    --color-green-700: hsl(120, 20%, 51%);
+    --color-green-800: hsl(120, 28%, 35%);
+    --color-green-900: hsl(120, 50%, 20%);
+}

@@ -1,37 +1,39 @@
 {
-  "name": "readmefy-app",
-  "version": "1.0.0",
-  "description": "A high-performance and scalable React application powered by Vite for fast development and efficient builds.",
-  "main": "index.jsx",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ymerej-noyorb/readmefy-app.git"
-  },
-  "keywords": [
-    "vite",
-    "react"
-  ],
-  "author": "ymerej-noyorb",
-  "license": "GPL-3.0",
-  "bugs": {
-    "url": "https://github.com/ymerej-noyorb/readmefy-app/issues"
-  },
-  "homepage": "https://github.com/ymerej-noyorb/readmefy-app#readme",
-  "dependencies": {
-    "@tailwindcss/vite": "^4.0.6",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "tailwindcss": "^4.0.6"
-  },
-  "devDependencies": {
-    "@types/react": "^19.0.8",
-    "@types/react-dom": "^19.0.3",
-    "@vitejs/plugin-react": "^4.3.4",
-    "vite": "^6.1.0"
-  }
+	"name": "readmefy-app",
+	"version": "1.0.0",
+	"description": "A high-performance and scalable React application powered by Vite for fast development and efficient builds.",
+	"main": "index.jsx",
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"build": "vite build"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ymerej-noyorb/readmefy-app.git"
+	},
+	"keywords": [
+		"vite",
+		"react"
+	],
+	"author": "ymerej-noyorb",
+	"license": "GPL-3.0",
+	"bugs": {
+		"url": "https://github.com/ymerej-noyorb/readmefy-app/issues"
+	},
+	"homepage": "https://github.com/ymerej-noyorb/readmefy-app#readme",
+	"dependencies": {
+		"@heroicons/react": "^2.2.0",
+		"@tailwindcss/vite": "^4.0.6",
+		"react": "^19.0.0",
+		"react-dom": "^19.0.0",
+		"react-router-dom": "^7.1.5",
+		"tailwindcss": "^4.0.6"
+	},
+	"devDependencies": {
+		"@types/react": "^19.0.8",
+		"@types/react-dom": "^19.0.3",
+		"@vitejs/plugin-react": "^4.3.4",
+		"vite": "^6.1.0"
+	}
 }
