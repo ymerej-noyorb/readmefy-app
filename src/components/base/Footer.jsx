@@ -1,10 +1,12 @@
 import React from "react";
 
-export default function Footer() {
+export default function Footer({ isDisplayed }) {
+	if (isDisplayed) return null;
+
 	const currentYear = new Date().getFullYear();
 
 	return (
-		<footer className="bg-dark-900 py-8">
+		<footer className="bg-dark-500 py-8">
 			<div className="max-w-7xl mx-auto flex items-center justify-between">
 				<div className="flex items-center gap-3">
 					<img
