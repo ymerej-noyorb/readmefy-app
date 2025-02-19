@@ -29,7 +29,7 @@ const Sidebar = ({ isDisplayed }) => {
 	};
 
 	return (
-		<div className="w-64 p-8 bg-dark-600 flex flex-col h-[calc(100vh-87px)] top-[87px] fixed">
+		<div className="w-64 p-8 bg-dark-600 flex flex-col min-h-[calc(100vh-87px)] top-[87px] fixed">
 			<h2 className="text-xl font-bold mb-6">Sources</h2>
 			<ul className="space-y-6 flex-1">
 				{sidebarItems.map((item) => (

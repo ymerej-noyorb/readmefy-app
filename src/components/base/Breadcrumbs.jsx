@@ -22,7 +22,7 @@ const Breadcrumbs = ({ isDisplayed }) => {
 	const breadcrumbItems = getBreadcrumbItems();
 
 	return (
-		<nav className="bg-dark-700 fixed top-[87px] left-[256px] w-screen">
+		<nav className="bg-dark-700 fixed top-[87px] left-[256px] w-screen h-[88px]">
 			<div className="text-l flex items-center p-8">
 				{breadcrumbItems.map((item, index) => (
 					<div key={item.href} className="flex items-center">

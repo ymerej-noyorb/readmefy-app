@@ -2,7 +2,9 @@ import React from "react";
 
 export default function Header({ isFixed }) {
 	return (
-		<header className={`bg-dark-500 p-6 ${isFixed ? "fixed w-screen" : ""}`}>
+		<header
+			className={`bg-dark-500 p-6 h-[87px] ${isFixed ? "fixed w-screen" : ""}`}
+		>
 			<div className="max-w-7xl mx-auto flex items-center justify-between">
 				<a href="/" className="flex items-center gap-3">
 					<img
@@ -16,13 +18,13 @@ export default function Header({ isFixed }) {
 				<nav>
 					<ul className="flex gap-6">
 						<li>
-							<a href="/hub" className="text-white hover:underline">
-								Hub
+							<a href="/login" className="text-white hover:text-blue-500">
+								Login
 							</a>
 						</li>
 						<li>
-							<a href="/login" className="text-white hover:underline">
-								Login
+							<a href="/dashboard" className="text-white hover:text-blue-500">
+								Dashboard
 							</a>
 						</li>
 					</ul>

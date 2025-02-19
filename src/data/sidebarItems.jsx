@@ -10,43 +10,43 @@ export const sidebarItems = [
 	{
 		title: "Repository",
 		icon: FolderIcon,
-		path: "/hub/repository",
+		path: "/dashboard/repository",
 		subItems: [
-			{ title: "New Repository", path: "/hub/repository/tool" },
-			{ title: "Manage Repositories", path: "/hub/repository" },
+			{ title: "New Repository", path: "/dashboard/repository/tool" },
+			{ title: "Manage Repositories", path: "/dashboard/repository" },
 		],
 	},
 	{
 		title: "Profile",
 		icon: UserIcon,
-		path: "/hub/profile",
+		path: "/dashboard/profile",
 		subItems: [
-			{ title: "New Profile", path: "/hub/profile/tool" },
-			{ title: "Manage Profiles", path: "/hub/profile" },
+			{ title: "New Profile", path: "/dashboard/profile/tool" },
+			{ title: "Manage Profiles", path: "/dashboard/profile" },
 		],
 	},
 	{
 		title: "Template",
 		icon: DocumentIcon,
-		path: "/hub/template",
+		path: "/dashboard/template",
 		subItems: [
-			{ title: "New Template", path: "/hub/template/tool" },
-			{ title: "Manage Templates", path: "/hub/template" },
+			{ title: "New Template", path: "/dashboard/template/tool" },
+			{ title: "Manage Templates", path: "/dashboard/template" },
 		],
 	},
 	{
 		title: "Editor",
 		icon: PencilIcon,
-		path: "/hub/editor",
+		path: "/dashboard/editor",
 		subItems: [
-			{ title: "New Editor", path: "/hub/editor/tool" },
-			{ title: "Manage Editors", path: "/hub/editor" },
+			{ title: "New Editor", path: "/dashboard/editor/tool" },
+			{ title: "Manage Editors", path: "/dashboard/editor" },
 		],
 	},
 	{
 		title: "Settings",
 		icon: Cog6ToothIcon,
-		path: "/hub/settings",
+		path: "/dashboard/settings",
 		subItems: [],
 	},
 ];
