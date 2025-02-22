@@ -13,29 +13,12 @@ import Header from "./components/base/Header";
 import Footer from "./components/base/Footer";
 import Breadcrumbs from "./components/base/Breadcrumbs";
 import Sidebar from "./components/base/Sidebar";
-
-const isHomePage = (pathname) => pathname === "/";
-const isLoginPage = (pathname) => pathname === "/login";
-const isNotFoundPage = (pathname) =>
-	pathname !== "/" &&
-	pathname !== "/login" &&
-	!location.pathname.match(/\/dashboard/);
-const isBannedPage = (pathname) =>
-	!(isHomePage(pathname) || isLoginPage(pathname) || isNotFoundPage(pathname));
-
-const getContainerClasses = (pathname) => {
-	if (isHomePage(pathname) || isLoginPage(pathname))
-		return "w-screen h-full pt-[87px]";
-	if (isNotFoundPage(pathname)) return "w-screen h-full";
-	return "w-screen h-screen pt-[87px]";
-};
-
-const getMainClasses = (pathname) => {
-	if (isHomePage(pathname)) return "flex-1 p-8";
-	if (isLoginPage(pathname) || isNotFoundPage(pathname))
-		return "max-w-7xl mx-auto w-screen min-h-[calc(100vh-(87px+103px))]";
-	return "w-screen min-h-[calc(100vh-103px)] pl-[256px]";
-};
+import {
+	getContainerClasses,
+	getMainClasses,
+	isBannedPage,
+	isNotFoundPage,
+} from "./utils/app";
 
 const AppContent = () => {
 	const location = useLocation();

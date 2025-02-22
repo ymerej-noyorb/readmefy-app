@@ -15,7 +15,7 @@ export default function Hero() {
 						writing.
 					</p>
 					<a
-						href="/dashboard"
+						href="/login"
 						className="flex items-center bg-orange-200 text-dark-500 font-serif text-xl w-fit py-2 px-6 rounded-lg shadow-lg hover:bg-orange-300 transition"
 					>
 						Try It Now
