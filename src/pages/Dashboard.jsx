@@ -16,7 +16,7 @@ export default function Dashboard() {
 		if (isFetched.current) return;
 		isFetched.current = true;
 
-		fetch(`${api.url}/auth/user`, { credentials: "include" })
+		fetch(`${api.url}/user`, { credentials: "include" })
 			.then((res) => res.json())
 			.then((data) => {
 				if (data.success) {
