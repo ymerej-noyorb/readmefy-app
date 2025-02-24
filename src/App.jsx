@@ -35,9 +35,9 @@ const AppContent = () => {
 				<div className={mainClasses}>
 					<Breadcrumbs isDisplayed={isBannedPage(pathname)} />
 					<Routes>
-						<Route exact path="/" element={<Home />} />
+						<Route index element={<Home />} />
 						<Route path="/dashboard/*" element={<Dashboard />} />
-						<Route exact path="/login" element={<Login />} />
+						<Route path="/login" element={<Login />} />
 						<Route path="*" element={<Notfound />} />
 					</Routes>
 				</div>

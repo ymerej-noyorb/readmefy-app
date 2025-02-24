@@ -1,38 +1,27 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { providerItems } from "../data/providerItems";
-import Message from "../components/base/Message";
-import { api } from "../utils/api";
+import Toast from "../components/base/Toast";
 
 export default function Login() {
-	const isFetched = useRef(false);
+	const [errorMessage, setErrorMessage] = useState(null);
+	const location = useLocation();
 	const navigate = useNavigate();
-	const [response, setResponse] = useState(null);
-	const [showMessage, setShowMessage] = useState(true);
 
 	useEffect(() => {
-		if (isFetched.current) return;
-		isFetched.current = true;
+		const params = new URLSearchParams(location.search);
+		const errorParam = params.get("error");
 
-		fetch(`${api.url}/auth/status`, { credentials: "include" })
-			.then((res) => {
-				if (res.status === 204) return null;
-				return res.json();
-			})
-			.then((data) => {
-				if (data) {
-					setResponse(data);
-					setShowMessage(true);
-					setTimeout(() => {
-						setShowMessage(false);
-						if (data.success) {
-							navigate("/dashboard");
-						}
-					}, 5000);
-				}
-			})
-			.catch((error) => console.error("Failed to fetch auth status", error));
-	}, []);
+		if (errorParam) {
+			setErrorMessage(errorParam);
+
+			params.delete("error");
+			navigate(
+				{ pathname: location.pathname, search: params.toString() },
+				{ replace: true }
+			);
+		}
+	}, [location]);
 
 	return (
 		<section className="flex justify-center items-center min-h-[inherit]">
@@ -52,30 +41,29 @@ export default function Login() {
 						with the following methods. We do not store your password or
 						sensitive information.
 					</p>
-					{showMessage && response ? (
-						<Message data={response} />
-					) : (
-						<div className="flex gap-4">
-							{providerItems.map((provider, index) => (
-								<a
-									key={index}
-									href={provider.url}
-									className={`flex items-center ${provider.backgroundColor} font-serif text-dark-500 text-base w-fit py-2 px-6 rounded-lg shadow-lg ${provider.hoverColor} transition`}
-								>
-									{provider.logo ? (
-										<img
-											src={provider.logo}
-											alt={`${provider.name} Logo`}
-											className="size-6 mr-2"
-										/>
-									) : (
-										<provider.icon className="size-6 mr-2" />
-									)}
-									Sign in with {provider.name}
-								</a>
-							))}
-						</div>
-					)}
+
+					{errorMessage && <Toast message={errorMessage} />}
+
+					<div className="flex gap-4">
+						{providerItems.map((provider, index) => (
+							<a
+								key={index}
+								href={provider.url}
+								className={`flex items-center ${provider.backgroundColor} font-serif text-dark-500 text-base w-fit py-2 px-6 rounded-lg shadow-lg ${provider.hoverColor} transition`}
+							>
+								{provider.logo ? (
+									<img
+										src={provider.logo}
+										alt={`${provider.name} Logo`}
+										className="size-6 mr-2"
+									/>
+								) : (
+									<provider.icon className="size-6 mr-2" />
+								)}
+								Sign in with {provider.name}
+							</a>
+						))}
+					</div>
 				</div>
 
 				<div className="w-full md:w-1/3 flex justify-end">
