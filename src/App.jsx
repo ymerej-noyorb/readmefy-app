@@ -18,7 +18,7 @@ import {
 	getMainClasses,
 	isBannedPage,
 	isNotFoundPage,
-} from "./utils/app";
+} from "./utils/main";
 
 const AppContent = () => {
 	const location = useLocation();

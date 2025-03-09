@@ -1,27 +1,37 @@
 import React, { useEffect, useState } from "react";
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { providerItems } from "../data/providerItems";
 import Toast from "../components/base/Toast";
+import { removeParams } from "../utils/main";
 
 export default function Login() {
-	const [errorMessage, setErrorMessage] = useState(null);
+	const [provider, setProvider] = useState(null);
+	const [error, setError] = useState(null);
+	const [message, setMessage] = useState(null);
+	const [isAuthenticating, setIsAuthenticating] = useState(false);
 	const location = useLocation();
-	const navigate = useNavigate();
 
+	//TODO: Remove access of this page if user is already logged
 	useEffect(() => {
 		const params = new URLSearchParams(location.search);
+		const providerParam = params.get("provider");
 		const errorParam = params.get("error");
+		const messageParam = params.get("message");
 
-		if (errorParam) {
-			setErrorMessage(errorParam);
+		if (providerParam && errorParam && messageParam) {
+			setProvider(providerParam);
+			setError(errorParam);
+			setMessage(messageParam);
 
-			params.delete("error");
-			navigate(
-				{ pathname: location.pathname, search: params.toString() },
-				{ replace: true }
-			);
+			removeParams(params);
 		}
 	}, [location]);
+
+	const handleLoginClick = (url) => {
+		if (isAuthenticating) return;
+		setIsAuthenticating(true);
+		window.location.href = url;
+	};
 
 	return (
 		<section className="flex justify-center items-center min-h-[inherit]">
@@ -42,14 +52,19 @@ export default function Login() {
 						sensitive information.
 					</p>
 
-					{errorMessage && <Toast message={errorMessage} />}
-
-					<div className="flex gap-4">
+					<div className="flex flex-wrap gap-4">
 						{providerItems.map((provider, index) => (
-							<a
+							<button
 								key={index}
-								href={provider.url}
-								className={`flex items-center ${provider.backgroundColor} font-serif text-dark-500 text-base w-fit py-2 px-6 rounded-lg shadow-lg ${provider.hoverColor} transition`}
+								onClick={() => handleLoginClick(provider.url)}
+								disabled={isAuthenticating}
+								className={`flex items-center cursor-pointer ${
+									provider.backgroundColor
+								} font-serif text-dark-500 text-base w-fit py-2 px-6 rounded-lg shadow-lg ${
+									provider.hoverColor
+								} transition ${
+									isAuthenticating ? "opacity-50 cursor-not-allowed" : ""
+								}`}
 							>
 								{provider.logo ? (
 									<img
@@ -60,10 +75,16 @@ export default function Login() {
 								) : (
 									<provider.icon className="size-6 mr-2" />
 								)}
-								Sign in with {provider.name}
-							</a>
+								{isAuthenticating
+									? "Signing in..."
+									: `Sign in with ${provider.name}`}
+							</button>
 						))}
 					</div>
+
+					{error && (
+						<Toast provider={provider} error={error} message={message} />
+					)}
 				</div>
 
 				<div className="w-full md:w-1/3 flex justify-end">

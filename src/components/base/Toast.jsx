@@ -1,28 +1,14 @@
 import { ExclamationTriangleIcon } from "@heroicons/react/24/solid";
 import React, { useEffect, useState } from "react";
+import { providerItems } from "../../data/providerItems";
 
-export default function Toast({ message }) {
+export default function Toast({ provider, error, message }) {
 	const [progress, setProgress] = useState(100);
-	const [error, setError] = useState("");
 	const [isVisible, setIsVisible] = useState(true);
 
-	useEffect(() => {
-		if (message) {
-			switch (message) {
-				case "github_auth_failed" || "invalid_token":
-					setError("GitHub authentication failed.");
-					break;
-				case "user_not_found":
-					setError("User not found, please check your GitHub account.");
-					break;
-				case "server_error":
-					setError("An error occurred, please try again later.");
-					break;
-				default:
-					setError("An unknown error occurred, please try again.");
-			}
-		}
-	}, [message]);
+	const providerItem = providerItems.find(
+		(item) => item.name.toLowerCase() === provider.toLowerCase()
+	);
 
 	useEffect(() => {
 		const duration = 3000; // 3 secondes
@@ -42,27 +28,35 @@ export default function Toast({ message }) {
 	if (!isVisible) return null;
 
 	return (
-		//TODO: put error message to top right corner
 		<div
-			className={`fixed inset-0 flex items-center justify-center z-50 pointer-events-none transition-opacity duration-500 ${
+			className={`max-w-md w-full z-50 pointer-events-none transition-opacity duration-500 ${
 				isVisible ? "opacity-100" : "opacity-0"
 			}`}
 		>
 			<div
-				className="relative max-w-md w-full p-4 bg-red-900 text-white rounded-lg shadow-lg pointer-events-auto transition-all duration-300 transform"
+				className="relative w-full p-4 bg-red-900 text-white rounded-lg shadow-lg pointer-events-auto transition-all duration-300 transform"
 				style={{ transform: isVisible ? "translateY(0)" : "translateY(-20px)" }}
 			>
-				//TODO: add a rounded border to progression bar
 				<div
-					className="absolute top-0 left-0 w-full h-1 bg-red-600 transition-all duration-300"
+					className="absolute top-0 left-0 w-full h-1 bg-red-600 transition-all duration-300 rounded-tl-lg rounded-tr-lg"
 					style={{ width: `${progress}%` }}
 				></div>
-				<div className="flex items-center gap-3">
-					<ExclamationTriangleIcon className="h-6 w-6 text-red-500" />
+				<div className="flex items-center gap-3 text-red-500">
+					{providerItem?.logo ? (
+						<img
+							src={providerItem.logo}
+							alt={`${providerItem.name} Logo`}
+							className="h-6 w-6"
+						/>
+					) : providerItem?.icon ? (
+						<providerItem.icon className="h-6 w-6" />
+					) : (
+						<ExclamationTriangleIcon className="h-6 w-6" />
+					)}
 					<div>
 						<p>
 							<span className="font-bold">Error : </span>
-							{error}
+							{message}
 						</p>
 					</div>
 				</div>
