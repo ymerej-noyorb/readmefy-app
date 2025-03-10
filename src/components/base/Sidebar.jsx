@@ -68,6 +68,7 @@ const Sidebar = ({ isDisplayed }) => {
 
 			<hr />
 
+			{/* TODO: Replace if user is logged with logged out action */}
 			<ul className="mt-6">
 				<li className="mt-auto">
 					<div className="flex flex-col items-start">

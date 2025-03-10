@@ -1,0 +1,17 @@
+# Local dependency
+node_modules
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Temp files
+.DS_Store
+.idea
+.vscode
+*.log
+
+# Docker
+Dockerfile
+
+# Build
+dist

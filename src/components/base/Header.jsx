@@ -17,11 +17,13 @@ export default function Header({ isFixed }) {
 				</a>
 				<nav>
 					<ul className="flex gap-6">
+						{/* TODO: Replace with a logout if user is logged in */}
 						<li>
 							<a href="/login" className="text-white hover:text-blue-500">
 								Login
 							</a>
 						</li>
+						{/* TODO: Hide if user is logged out */}
 						<li>
 							<a href="/dashboard" className="text-white hover:text-blue-500">
 								Dashboard
