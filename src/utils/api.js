@@ -1,6 +1,6 @@
 export const api = {
 	url:
 		import.meta.env.MODE === "development"
-			? "http://localhost:3000/api"
+			? "http://readmefy.localhost/api"
 			: "https://readmefy.app/api",
 };
