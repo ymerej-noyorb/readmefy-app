@@ -9,5 +9,10 @@ export default defineConfig({
 		watch: {
 			usePolling: true,
 		},
+		hmr: {
+			protocol: "ws",
+			host: "readmefy.localhost",
+			port: 5173,
+		},
 	},
 });

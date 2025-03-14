@@ -9,7 +9,7 @@ const Breadcrumbs = ({ isDisplayed }) => {
 	const getBreadcrumbItems = () => {
 		const pathnames = location.pathname.split("/").filter((x) => x);
 		const breadcrumbItems = [
-			{ label: "Accueil", href: "/" },
+			{ label: "Home", href: "/" },
 			...pathnames.map((path, index) => {
 				const href = "/" + pathnames.slice(0, index + 1).join("/");
 				return { label: path.charAt(0).toUpperCase() + path.slice(1), href };
