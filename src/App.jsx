@@ -19,6 +19,8 @@ import {
 	isBannedPage,
 	isNotFoundPage,
 } from "./utils/main";
+import { AuthProvider } from "./contexts/AuthContext";
+import ProtectedRoute from "./components/base/ProtectedRoute";
 
 const AppContent = () => {
 	const location = useLocation();
@@ -36,8 +38,22 @@ const AppContent = () => {
 					<Breadcrumbs isDisplayed={isBannedPage(pathname)} />
 					<Routes>
 						<Route index element={<Home />} />
-						<Route path="/dashboard/*" element={<Dashboard />} />
-						<Route path="/login" element={<Login />} />
+						<Route
+							path="/dashboard/*"
+							element={
+								<ProtectedRoute isAuthenticatedRoute={false}>
+									<Dashboard />
+								</ProtectedRoute>
+							}
+						/>
+						<Route
+							path="/login"
+							element={
+								<ProtectedRoute isAuthenticatedRoute={true}>
+									<Login />
+								</ProtectedRoute>
+							}
+						/>
 						<Route path="*" element={<Notfound />} />
 					</Routes>
 				</div>
@@ -49,8 +65,10 @@ const AppContent = () => {
 
 export default function App() {
 	return (
-		<Router>
-			<AppContent />
-		</Router>
+		<AuthProvider>
+			<Router>
+				<AppContent />
+			</Router>
+		</AuthProvider>
 	);
 }

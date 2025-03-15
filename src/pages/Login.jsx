@@ -3,15 +3,16 @@ import { useLocation } from "react-router-dom";
 import { providerItems } from "../data/providerItems";
 import Toast from "../components/base/Toast";
 import { removeParams } from "../utils/main";
+import { useAuth } from "../contexts/AuthContext";
 
 export default function Login() {
+	const { login } = useAuth();
 	const [provider, setProvider] = useState(null);
 	const [error, setError] = useState(null);
 	const [message, setMessage] = useState(null);
 	const [isAuthenticating, setIsAuthenticating] = useState(false);
 	const location = useLocation();
 
-	//TODO: Remove access of this page if user is already logged
 	useEffect(() => {
 		const params = new URLSearchParams(location.search);
 		const providerParam = params.get("provider");
@@ -30,7 +31,7 @@ export default function Login() {
 	const handleLoginClick = (url) => {
 		if (isAuthenticating) return;
 		setIsAuthenticating(true);
-		window.location.href = url;
+		login(url);
 	};
 
 	return (

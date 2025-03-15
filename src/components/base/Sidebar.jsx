@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
-import {
-	ChevronDownIcon,
-	ChevronRightIcon,
-	ShieldCheckIcon,
-} from "@heroicons/react/24/solid";
+import { ChevronDownIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import { sidebarItems } from "../../data/sidebarItems";
+import { useAuth } from "../../contexts/AuthContext";
 
 const Sidebar = ({ isDisplayed }) => {
 	if (!isDisplayed) return null;
 
+	const { user, logout } = useAuth();
 	const location = useLocation();
 	const [openSections, setOpenSections] = useState({});
 
@@ -65,21 +63,33 @@ const Sidebar = ({ isDisplayed }) => {
 					</li>
 				))}
 			</ul>
-
 			<hr />
-
-			{/* TODO: Replace if user is logged with logged out action */}
 			<ul className="mt-6">
 				<li className="mt-auto">
-					<div className="flex flex-col items-start">
-						<Link
-							to="/login"
-							className="flex items-center justify-center bg-orange-200 text-dark-500 font-serif text-xl w-full py-2 px-6 rounded-lg shadow-lg hover:bg-orange-300 transition"
-						>
-							<span>Login</span>
-							<ShieldCheckIcon className="size-6 ml-2" />
-						</Link>
-					</div>
+					{user && (
+						<div className="flex flex-col gap-2 bg-dark-700 p-4 rounded-lg">
+							<div className="flex items-center gap-4">
+								<img
+									src={user.provider_avatar}
+									alt={user.provider_username}
+									className="w-10 h-10 rounded-full"
+								/>
+								<div className="flex flex-col">
+									<span className="text-white truncate max-w-[100px]">
+										{user.provider_username.length > 15
+											? `${user.provider_username.substring(0, 12)}...`
+											: user.provider_username}
+									</span>
+								</div>
+							</div>
+							<button
+								onClick={logout}
+								className="text-orange-200 hover:text-orange-300 text-left w-full mt-2"
+							>
+								Logout
+							</button>
+						</div>
+					)}
 				</li>
 			</ul>
 		</div>
