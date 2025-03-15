@@ -22,6 +22,7 @@ export const AuthProvider = ({ children }) => {
 		}
 	}, [user]);
 
+	//TODO: fix API call when every components is mounted
 	useEffect(() => {
 		if (!user) {
 			fetchUser();

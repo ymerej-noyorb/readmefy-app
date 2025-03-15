@@ -32,7 +32,7 @@ export default function Header({ isFixed }) {
 								<li>
 									<button
 										onClick={logout}
-										className="text-white hover:text-red-500"
+										className="text-white hover:text-blue-500 cursor-pointer"
 									>
 										Logout
 									</button>

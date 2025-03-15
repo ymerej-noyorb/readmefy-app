@@ -73,6 +73,7 @@ const Sidebar = ({ isDisplayed }) => {
 									src={user.provider_avatar}
 									alt={user.provider_username}
 									className="w-10 h-10 rounded-full"
+									draggable="false"
 								/>
 								<div className="flex flex-col">
 									<span className="text-white truncate max-w-[100px]">
@@ -82,12 +83,6 @@ const Sidebar = ({ isDisplayed }) => {
 									</span>
 								</div>
 							</div>
-							<button
-								onClick={logout}
-								className="text-orange-200 hover:text-orange-300 text-left w-full mt-2"
-							>
-								Logout
-							</button>
 						</div>
 					)}
 				</li>
