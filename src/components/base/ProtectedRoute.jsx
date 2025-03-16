@@ -2,11 +2,9 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 
-const ProtectedRoute = ({
-	children,
-	redirectTo = "/login",
-	isAuthenticatedRoute = false,
-}) => {
+//TODO: If user go to dashboard and he's unauhenticated, a request was sent to API before he was redirected
+//TODO: When a user try to logging in, if it's a success he's redirected to dashboard, next to login, finally to dashboard
+const ProtectedRoute = ({ children, isAuthenticatedRoute = false }) => {
 	const { user } = useAuth();
 	const navigate = useNavigate();
 
@@ -14,9 +12,9 @@ const ProtectedRoute = ({
 		if (isAuthenticatedRoute && user) {
 			navigate("/dashboard");
 		} else if (!isAuthenticatedRoute && !user) {
-			navigate(redirectTo);
+			navigate("/login");
 		}
-	}, [user, navigate, isAuthenticatedRoute, redirectTo]);
+	}, [user, navigate, isAuthenticatedRoute]);
 
 	return <>{children}</>;
 };

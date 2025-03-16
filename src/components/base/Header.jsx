@@ -29,6 +29,7 @@ export default function Header({ isFixed }) {
 										Dashboard
 									</a>
 								</li>
+								{/* //TODO: Replace with user avatar and trigger onClick to display logout button */}
 								<li>
 									<button
 										onClick={logout}

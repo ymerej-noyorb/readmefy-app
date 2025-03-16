@@ -75,6 +75,7 @@ const Sidebar = ({ isDisplayed }) => {
 									className="w-10 h-10 rounded-full"
 									draggable="false"
 								/>
+								{/* //TODO: onClick display user settings instead to display it in sidebar */}
 								<div className="flex flex-col">
 									<span className="text-white truncate max-w-[100px]">
 										{user.provider_username.length > 15

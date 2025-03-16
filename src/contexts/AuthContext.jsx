@@ -22,17 +22,9 @@ export const AuthProvider = ({ children }) => {
 		}
 	}, [user]);
 
-	//TODO: fix API call when every components is mounted
-	useEffect(() => {
-		if (!user) {
-			fetchUser();
-		} else {
-			setLoading(false);
-		}
-	}, []);
-
 	const fetchUser = async () => {
 		try {
+			setLoading(true);
 			const res = await fetch("/api/user/me", {
 				method: "GET",
 				headers: {
@@ -41,12 +33,14 @@ export const AuthProvider = ({ children }) => {
 				credentials: "include",
 			});
 
-			const data = await res.json();
+			if (res.ok) {
+				const data = await res.json();
 
-			if (data.success) {
-				setUser(data.data.user);
-			} else {
-				setUser(null);
+				if (data.success) {
+					setUser(data.data.user);
+				} else {
+					setUser(null);
+				}
 			}
 		} catch (err) {
 			console.error("Erreur lors de la récupération de l'utilisateur:", err);
@@ -62,6 +56,7 @@ export const AuthProvider = ({ children }) => {
 
 	const logout = async () => {
 		try {
+			setLoading(true);
 			const res = await fetch("/api/auth/logout", {
 				method: "GET",
 				headers: {
@@ -70,10 +65,12 @@ export const AuthProvider = ({ children }) => {
 				credentials: "include",
 			});
 
-			const data = await res.json();
+			if (res.ok) {
+				const data = await res.json();
 
-			if (data.success) {
-				setUser(null);
+				if (data.success) {
+					setUser(null);
+				}
 			}
 		} catch (err) {
 			console.error("Erreur lors de la déconnexion:", err);
@@ -83,7 +80,7 @@ export const AuthProvider = ({ children }) => {
 	};
 
 	return (
-		<AuthContext.Provider value={{ user, loading, login, logout }}>
+		<AuthContext.Provider value={{ user, loading, login, logout, fetchUser }}>
 			{children}
 		</AuthContext.Provider>
 	);

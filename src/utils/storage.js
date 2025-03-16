@@ -1,4 +1,3 @@
-//TODO: use Redux and Redux Persist instead of localStorage
 export const setUserLocalStorage = (user) => {
 	localStorage.setItem("READMEFY_USER", JSON.stringify(user));
 };
