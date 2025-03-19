@@ -1,5 +1,6 @@
 import { HomeIcon } from "@heroicons/react/24/solid";
 import React from "react";
+import { route } from "../utils/path";
 
 export default function Notfound() {
 	return (
@@ -24,7 +25,7 @@ export default function Notfound() {
 						continue browsing our site.
 					</p>
 					<a
-						href="/"
+						href={route.home}
 						className="flex items-center bg-orange-200 text-dark-500 font-serif text-xl w-fit py-2 px-6 rounded-lg shadow-lg hover:bg-orange-300 transition"
 					>
 						Go back home

@@ -4,6 +4,7 @@ import {
 	getUserLocalStorage,
 	setUserLocalStorage,
 } from "../utils/storage";
+import { api } from "../utils/api";
 
 const AuthContext = createContext();
 
@@ -12,41 +13,26 @@ export const AuthProvider = ({ children }) => {
 		const storedUser = getUserLocalStorage();
 		return storedUser ? JSON.parse(storedUser) : null;
 	});
-	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
-		if (user) {
-			setUserLocalStorage(user);
-		} else {
-			clearUserLocalStorage();
-		}
+		user ? setUserLocalStorage(user) : clearUserLocalStorage();
 	}, [user]);
 
-	const fetchUser = async () => {
+	const me = async () => {
 		try {
-			setLoading(true);
-			const res = await fetch("/api/user/me", {
-				method: "GET",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				credentials: "include",
-			});
+			const result = await api.get(api.endpoint.user);
 
-			if (res.ok) {
-				const data = await res.json();
-
-				if (data.success) {
-					setUser(data.data.user);
-				} else {
-					setUser(null);
-				}
+			if (result.success) {
+				setUser(result.data.user);
+				return result;
+			} else {
+				setUser(null);
+				throw new Error(result.message);
 			}
 		} catch (err) {
-			console.error("Erreur lors de la récupération de l'utilisateur:", err);
+			console.error(err);
 			setUser(null);
-		} finally {
-			setLoading(false);
+			throw err;
 		}
 	};
 
@@ -56,34 +42,31 @@ export const AuthProvider = ({ children }) => {
 
 	const logout = async () => {
 		try {
-			setLoading(true);
-			const res = await fetch("/api/auth/logout", {
-				method: "GET",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				credentials: "include",
-			});
+			const result = await api.get(api.endpoint.logout);
 
-			if (res.ok) {
-				const data = await res.json();
-
-				if (data.success) {
-					setUser(null);
-				}
+			if (result.success) {
+				setUser(null);
+				return result;
+			} else {
+				throw new Error(result.message);
 			}
 		} catch (err) {
-			console.error("Erreur lors de la déconnexion:", err);
-		} finally {
-			setLoading(false);
+			console.error(err);
+			throw err;
 		}
 	};
 
 	return (
-		<AuthContext.Provider value={{ user, loading, login, logout, fetchUser }}>
+		<AuthContext.Provider value={{ user, login, logout, me }}>
 			{children}
 		</AuthContext.Provider>
 	);
 };
 
-export const useAuth = () => useContext(AuthContext);
+export const useAuth = () => {
+	const context = useContext(AuthContext);
+	if (!context) {
+		throw new Error("useAuth must be used within an AuthProvider");
+	}
+	return context;
+};

@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
-import { ChevronDownIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
+import {
+	ChevronDownIcon,
+	ChevronRightIcon,
+	Cog6ToothIcon,
+	ArrowRightOnRectangleIcon,
+} from "@heroicons/react/24/solid";
 import { sidebarItems } from "../../data/sidebarItems";
 import { useAuth } from "../../contexts/AuthContext";
+import { route } from "../../utils/path";
 
 const Sidebar = ({ isDisplayed }) => {
 	if (!isDisplayed) return null;
-
 	const { user, logout } = useAuth();
 	const location = useLocation();
 	const [openSections, setOpenSections] = useState({});
+	const [userMenuOpen, setUserMenuOpen] = useState(false);
 
 	useEffect(() => {
 		const newOpenSections = {};
@@ -24,6 +30,10 @@ const Sidebar = ({ isDisplayed }) => {
 			...prev,
 			[path]: !prev[path],
 		}));
+	};
+
+	const toggleUserMenu = () => {
+		setUserMenuOpen(!userMenuOpen);
 	};
 
 	return (
@@ -67,23 +77,48 @@ const Sidebar = ({ isDisplayed }) => {
 			<ul className="mt-6">
 				<li className="mt-auto">
 					{user && (
-						<div className="flex flex-col gap-2 bg-dark-700 p-4 rounded-lg">
-							<div className="flex items-center gap-4">
+						<div className="flex flex-col gap-2">
+							<div
+								className="flex items-center gap-4 bg-dark-700 p-4 rounded-lg cursor-pointer"
+								onClick={toggleUserMenu}
+							>
 								<img
 									src={user.provider_avatar}
 									alt={user.provider_username}
 									className="w-10 h-10 rounded-full"
 									draggable="false"
 								/>
-								{/* //TODO: onClick display user settings instead to display it in sidebar */}
-								<div className="flex flex-col">
-									<span className="text-white truncate max-w-[100px]">
+								<div className="flex flex-col flex-1">
+									<span className="truncate max-w-[70px]">
 										{user.provider_username.length > 15
 											? `${user.provider_username.substring(0, 12)}...`
 											: user.provider_username}
 									</span>
 								</div>
+								<ChevronDownIcon
+									className={`h-5 w-5 transition-transform ${
+										userMenuOpen ? "rotate-180" : ""
+									}`}
+								/>
 							</div>
+							{userMenuOpen && (
+								<div className="bg-dark-700 rounded-lg mt-1 overflow-hidden">
+									<Link
+										to={route.settings}
+										className="flex items-center gap-2 px-4 py-3 hover:bg-dark-800 transition-colors"
+									>
+										<Cog6ToothIcon className="h-5 w-5" />
+										Settings
+									</Link>
+									<button
+										className="flex items-center gap-2 w-full text-left px-4 py-3 cursor-pointer hover:bg-dark-800 transition-colors text-red-500"
+										onClick={logout}
+									>
+										<ArrowRightOnRectangleIcon className="h-5 w-5" />
+										Logout
+									</button>
+								</div>
+							)}
 						</div>
 					)}
 				</li>

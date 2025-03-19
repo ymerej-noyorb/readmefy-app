@@ -18,47 +18,43 @@ import {
 	getMainClasses,
 	isBannedPage,
 	isNotFoundPage,
-} from "./utils/main";
+} from "./utils/layout";
 import { AuthProvider } from "./contexts/AuthContext";
-import ProtectedRoute from "./components/base/ProtectedRoute";
+import PrivateRoutes from "./components/auth/PrivateRoutes";
+import LoginCallback from "./components/auth/LoginCallback";
+import PublicRoutes from "./components/auth/PublicRoutes";
+import { route } from "./utils/path";
 
 const AppContent = () => {
-	const location = useLocation();
-	const { pathname } = location;
-
+	const { pathname } = useLocation();
 	const containerClasses = getContainerClasses(pathname);
 	const mainClasses = getMainClasses(pathname);
+	const showSidebar = isBannedPage(pathname);
+	const showFooter = isBannedPage(pathname);
+	const showHeader = isBannedPage(pathname) || !isNotFoundPage(pathname);
+	const showBreadcrumbs = isBannedPage(pathname);
 
 	return (
 		<>
-			<Header isFixed={isBannedPage(pathname) || !isNotFoundPage(pathname)} />
+			{showHeader && <Header isFixed={true} />}
 			<main className={containerClasses}>
-				<Sidebar isDisplayed={isBannedPage(pathname)} />
+				{showSidebar && <Sidebar isDisplayed={true} />}
 				<div className={mainClasses}>
-					<Breadcrumbs isDisplayed={isBannedPage(pathname)} />
+					{showBreadcrumbs && <Breadcrumbs isDisplayed={true} />}
 					<Routes>
 						<Route index element={<Home />} />
-						<Route
-							path="/dashboard/*"
-							element={
-								<ProtectedRoute isAuthenticatedRoute={false}>
-									<Dashboard />
-								</ProtectedRoute>
-							}
-						/>
-						<Route
-							path="/login"
-							element={
-								<ProtectedRoute isAuthenticatedRoute={true}>
-									<Login />
-								</ProtectedRoute>
-							}
-						/>
+						<Route element={<PrivateRoutes />}>
+							<Route path={`${route.dashboard}/*`} element={<Dashboard />} />
+						</Route>
+						<Route element={<PublicRoutes />}>
+							<Route path={route.login} element={<Login />} />
+						</Route>
+						<Route path={route.callback} element={<LoginCallback />} />
 						<Route path="*" element={<Notfound />} />
 					</Routes>
 				</div>
 			</main>
-			<Footer isDisplayed={isBannedPage(pathname)} />
+			{showFooter && <Footer isDisplayed={true} />}
 		</>
 	);
 };

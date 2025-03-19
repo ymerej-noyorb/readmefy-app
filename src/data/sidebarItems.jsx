@@ -5,12 +5,13 @@ import {
 	PencilIcon,
 	Cog6ToothIcon,
 } from "@heroicons/react/24/solid";
+import { route } from "../utils/path";
 
 export const sidebarItems = [
 	{
 		title: "Repository",
 		icon: FolderIcon,
-		path: "/dashboard/repository",
+		path: route.repository,
 		subItems: [
 			{ title: "New Repository", path: "/dashboard/repository/tool" },
 			{ title: "Manage Repositories", path: "/dashboard/repository" },
@@ -19,7 +20,7 @@ export const sidebarItems = [
 	{
 		title: "Profile",
 		icon: UserIcon,
-		path: "/dashboard/profile",
+		path: route.profile,
 		subItems: [
 			{ title: "New Profile", path: "/dashboard/profile/tool" },
 			{ title: "Manage Profiles", path: "/dashboard/profile" },
@@ -28,7 +29,7 @@ export const sidebarItems = [
 	{
 		title: "Template",
 		icon: DocumentIcon,
-		path: "/dashboard/template",
+		path: route.template,
 		subItems: [
 			{ title: "New Template", path: "/dashboard/template/tool" },
 			{ title: "Manage Templates", path: "/dashboard/template" },
@@ -37,16 +38,10 @@ export const sidebarItems = [
 	{
 		title: "Editor",
 		icon: PencilIcon,
-		path: "/dashboard/editor",
+		path: route.editor,
 		subItems: [
 			{ title: "New Editor", path: "/dashboard/editor/tool" },
 			{ title: "Manage Editors", path: "/dashboard/editor" },
 		],
-	},
-	{
-		title: "Settings",
-		icon: Cog6ToothIcon,
-		path: "/dashboard/settings",
-		subItems: [],
 	},
 ];

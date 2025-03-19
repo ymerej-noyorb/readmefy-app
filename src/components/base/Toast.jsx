@@ -34,7 +34,7 @@ export default function Toast({ provider, error, message }) {
 			}`}
 		>
 			<div
-				className="relative w-full p-4 bg-red-900 text-white rounded-lg shadow-lg pointer-events-auto transition-all duration-300 transform"
+				className="relative w-full p-4 bg-red-900 rounded-lg shadow-lg pointer-events-auto transition-all duration-300 transform"
 				style={{ transform: isVisible ? "translateY(0)" : "translateY(-20px)" }}
 			>
 				<div

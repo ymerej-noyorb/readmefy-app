@@ -1,5 +1,6 @@
 import { HomeIcon } from "@heroicons/react/24/solid";
 import React from "react";
+import { route } from "../../utils/path";
 
 export default function NotFound() {
 	return (
@@ -18,7 +19,7 @@ export default function NotFound() {
 					Oops! The page you're looking for doesn't exist.
 				</p>
 				<a
-					href="/dashboard"
+					href={route.dashboard}
 					className="flex bg-orange-200 text-dark-500 font-serif text-xl w-fit py-2 px-6 rounded-lg shadow-lg hover:bg-orange-300 transition"
 				>
 					Go to dashboard
