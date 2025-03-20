@@ -7,6 +7,7 @@ import {
 	Cog6ToothIcon,
 	ArrowRightOnRectangleIcon,
 	ArrowLeftOnRectangleIcon,
+	HomeIcon,
 } from "@heroicons/react/24/solid";
 
 export default function Header({ isFixed }) {
@@ -24,7 +25,7 @@ export default function Header({ isFixed }) {
 			}`}
 		>
 			<div className="max-w-7xl mx-auto flex items-center justify-between">
-				<a href="/" className="flex items-center gap-3">
+				<a href={route.home} className="flex items-center gap-3">
 					<img
 						className="w-[36px]"
 						src="https://i.imgur.com/uOFlcFG.png"
@@ -35,6 +36,15 @@ export default function Header({ isFixed }) {
 				</a>
 				<nav>
 					<ul className="flex gap-6 items-center">
+						<li>
+							<a
+								href={route.home}
+								className="flex items-center gap-2 hover:text-blue-500"
+							>
+								<HomeIcon className="h-5 w-5" />
+								Home
+							</a>
+						</li>
 						{user ? (
 							<>
 								<li>
@@ -66,7 +76,7 @@ export default function Header({ isFixed }) {
 									{userMenuOpen && (
 										<div className="absolute right-0 mt-2 bg-dark-700 rounded-lg overflow-hidden w-44 shadow-lg z-50">
 											<a
-												href={route.settings}
+												href={route.settings.dashboard.path}
 												className="flex items-center gap-2 px-4 py-2 hover:bg-dark-800 transition-colors"
 											>
 												<Cog6ToothIcon className="h-4 w-4" />

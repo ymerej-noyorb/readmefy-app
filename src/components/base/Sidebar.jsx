@@ -104,7 +104,7 @@ const Sidebar = ({ isDisplayed }) => {
 							{userMenuOpen && (
 								<div className="bg-dark-700 rounded-lg mt-1 overflow-hidden">
 									<Link
-										to={route.settings}
+										to={route.settings.dashboard.path}
 										className="flex items-center gap-2 px-4 py-3 hover:bg-dark-800 transition-colors"
 									>
 										<Cog6ToothIcon className="h-5 w-5" />

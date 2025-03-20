@@ -3,11 +3,44 @@ export const route = {
 	login: "/login",
 	callback: "/login/callback",
 	dashboard: "/dashboard",
-	repository: "/dashboard/repository",
-	profile: "/dashboard/profile",
-	template: "/dashboard/template",
-	editor: "/dashboard/editor",
-	settings: "/dashboard/settings",
+	repository: {
+		path: "/repository",
+		tool: "/repository/tool",
+		dashboard: {
+			path: "/dashboard/repository",
+			tool: "/dashboard/repository/tool",
+		},
+	},
+	profile: {
+		path: "/profile",
+		tool: "/profile/tool",
+		dashboard: {
+			path: "/dashboard/profile",
+			tool: "/dashboard/profile/tool",
+		},
+	},
+	template: {
+		path: "/template",
+		tool: "/template/tool",
+		dashboard: {
+			path: "/dashboard/template",
+			tool: "/dashboard/template/tool",
+		},
+	},
+	editor: {
+		path: "/editor",
+		tool: "/editor/tool",
+		dashboard: {
+			path: "/dashboard/editor",
+			tool: "/dashboard/editor/tool",
+		},
+	},
+	settings: {
+		path: "/settings",
+		dashboard: {
+			path: "/dashboard/settings",
+		},
+	},
 };
 
 export const removeParams = (params) => {
