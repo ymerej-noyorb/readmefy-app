@@ -10,7 +10,7 @@ export const clearUserLocalStorage = () => {
 	localStorage.removeItem("READMEFY_USER");
 };
 
-export const setAuthLocalStorage = (user) => {
+export const setAuthLocalStorage = () => {
 	localStorage.setItem("READMEFY_AUTH", true);
 };
 

@@ -36,25 +36,45 @@ const Sidebar = ({ isDisplayed }) => {
 		setUserMenuOpen(!userMenuOpen);
 	};
 
+	// Fonction pour gérer la classe active
+	const getLinkClass = (path) =>
+		location.pathname === path
+			? "text-blue-500 font-semibold"
+			: "hover:text-blue-500";
+
 	return (
 		<div className="w-64 p-8 bg-dark-600 flex flex-col min-h-[calc(100vh-87px)] top-[87px] fixed">
 			<h2 className="text-xl font-bold mb-6">Sources</h2>
 			<ul className="space-y-6 flex-1">
 				{sidebarItems.map((item) => (
 					<li key={item.path}>
-						<button
-							onClick={() => toggleSection(item.path)}
-							className="w-full text-left flex items-center hover:text-blue-500 cursor-pointer"
-						>
-							<item.icon className="h-5 w-5 mr-2" />
-							<span className="font-semibold">{item.title}</span>
-							{item.subItems.length > 0 &&
-								(openSections[item.path] ? (
+						{item.subItems.length > 0 ? (
+							// Si l'élément a des sous-éléments, on affiche un bouton
+							<button
+								onClick={() => toggleSection(item.path)}
+								className={`w-full text-left flex items-center cursor-pointer ${getLinkClass(
+									item.path
+								)}`}
+							>
+								<item.icon className="h-5 w-5 mr-2" />
+								<span className="font-semibold">{item.title}</span>
+								{openSections[item.path] ? (
 									<ChevronDownIcon className="h-5 w-5 ml-auto" />
 								) : (
 									<ChevronRightIcon className="h-5 w-5 ml-auto" />
-								))}
-						</button>
+								)}
+							</button>
+						) : (
+							// Si pas de sous-éléments, on affiche un lien direct
+							<Link
+								to={item.path}
+								className={`flex items-center ${getLinkClass(item.path)}`}
+							>
+								<item.icon className="h-5 w-5 mr-2" />
+								<span className="font-semibold">{item.title}</span>
+							</Link>
+						)}
+
 						{item.subItems.length > 0 && (
 							<ul
 								className={`pt-4 pl-4 space-y-4 ${
@@ -63,7 +83,10 @@ const Sidebar = ({ isDisplayed }) => {
 							>
 								{item.subItems.map((subItem) => (
 									<li key={subItem.path}>
-										<Link to={subItem.path} className="hover:text-blue-500">
+										<Link
+											to={subItem.path}
+											className={`block ${getLinkClass(subItem.path)}`}
+										>
 											{subItem.title}
 										</Link>
 									</li>
@@ -105,7 +128,9 @@ const Sidebar = ({ isDisplayed }) => {
 								<div className="bg-dark-700 rounded-lg mt-1 overflow-hidden">
 									<Link
 										to={route.settings.dashboard.path}
-										className="flex items-center gap-2 px-4 py-3 hover:bg-dark-800 transition-colors"
+										className={`flex items-center gap-2 px-4 py-3 ${getLinkClass(
+											route.settings.dashboard.path
+										)} hover:bg-dark-800 transition-colors`}
 									>
 										<Cog6ToothIcon className="h-5 w-5" />
 										Settings

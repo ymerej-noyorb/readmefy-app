@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { route } from "../../utils/path";
 import {
@@ -13,10 +14,16 @@ import {
 export default function Header({ isFixed }) {
 	const { user, logout } = useAuth();
 	const [userMenuOpen, setUserMenuOpen] = useState(false);
+	const location = useLocation();
 
 	const toggleUserMenu = () => {
 		setUserMenuOpen(!userMenuOpen);
 	};
+
+	const getLinkClass = (path) =>
+		location.pathname === path
+			? "text-blue-500 font-semibold"
+			: "hover:text-blue-500";
 
 	return (
 		<header
@@ -39,7 +46,9 @@ export default function Header({ isFixed }) {
 						<li>
 							<a
 								href={route.home}
-								className="flex items-center gap-2 hover:text-blue-500"
+								className={`flex items-center gap-2 ${getLinkClass(
+									route.home
+								)}`}
 							>
 								<HomeIcon className="h-5 w-5" />
 								Home
@@ -50,7 +59,9 @@ export default function Header({ isFixed }) {
 								<li>
 									<a
 										href={route.dashboard}
-										className="flex items-center gap-2 hover:text-blue-500"
+										className={`flex items-center gap-2 ${getLinkClass(
+											route.dashboard
+										)}`}
 									>
 										<RectangleGroupIcon className="h-5 w-5" />
 										Dashboard
@@ -77,7 +88,9 @@ export default function Header({ isFixed }) {
 										<div className="absolute right-0 mt-2 bg-dark-700 rounded-lg overflow-hidden w-44 shadow-lg z-50">
 											<a
 												href={route.settings.dashboard.path}
-												className="flex items-center gap-2 px-4 py-2 hover:bg-dark-800 transition-colors"
+												className={`flex items-center gap-2 px-4 py-2 ${getLinkClass(
+													route.settings.dashboard.path
+												)} hover:bg-dark-800 transition-colors`}
 											>
 												<Cog6ToothIcon className="h-4 w-4" />
 												Settings
@@ -97,7 +110,9 @@ export default function Header({ isFixed }) {
 							<li>
 								<a
 									href={route.login}
-									className="flex items-center gap-2 hover:text-blue-500"
+									className={`flex items-center gap-2 ${getLinkClass(
+										route.login
+									)}`}
 								>
 									<ArrowLeftOnRectangleIcon className="h-5 w-5" />
 									Login
